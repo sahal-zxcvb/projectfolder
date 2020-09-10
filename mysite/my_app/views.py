@@ -9,7 +9,7 @@ def sss(request):
 def add_todo(request):
     n=todo_item(concept=request.POST['concept'])
     n.save()
-    return HttpResponseRedirect('/add_todo/')
+    return HttpResponseRedirect('/add_todo')
 
 def delete_todo(request,todo_id):
     delete_item=todo_item.objects.get(id=todo_id)
