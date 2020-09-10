@@ -7,11 +7,15 @@ def sss(request):
     return render(request,'my_app/detail.html',{'all_items':q})
 
 def add_todo(request):
-    n=todo_item(concept=request.POST['concept'])
-    n.save()
-    return HttpResponseRedirect('/add_todo')
+    if request.method=="POST":
+        a=request.POST['concept']
+        if a.strip()!='':
+            n=todo_item(concept=a)
+            n.save()
+    return HttpResponseRedirect('/')
 
 def delete_todo(request,todo_id):
-    delete_item=todo_item.objects.get(id=todo_id)
-    delete_item.delete()
-    return HttpResponseRedirect('/delete_todo/')
+    if request.method=="POST":
+        delete_item=todo_item.objects.get(id=todo_id)
+        delete_item.delete()
+    return HttpResponseRedirect('/')
